@@ -1,34 +1,46 @@
-pipeline{
-    agent{
-        label "node"
-    }
-    stages{
-        stage("A"){
-            steps{
-                echo "========executing A========"
-            }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
+pipeline {  
+    agent any  
+    stages  {  
+            stage ('Build') {  
+                 steps {  
+                        echo 'Building...'  
+                        sleep 5
+                }  
+            }  
+            stage ('Test') {  
+steps {  
+                        echo 'Testing...'  
+          sleep 5
+                }   
+            }  
+            stage ('QA') {  
+steps {  
+                        echo 'QA...'  
+          sleep 5
+                }  
+            }  
+            stage ('Deploy') {  
+    steps {  
+                        echo 'Deploying...'  
+          sleep 5
+                }  
+            }  
+            stage ('Monitor') {  
+    steps {  
+                        echo 'Monitoring...'  
+          sleep 5
+                }  
+            }  
+    } 
+    post {  
+        always {
+            echo 'Execute Always'
         }
-    }
-    post{
-        always{
-            echo "========always========"
+       success {
+            echo 'Success'
         }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
+        failure {
+            echo 'Failure'
         }
     }
 }
